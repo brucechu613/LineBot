@@ -12,7 +12,6 @@ from utils import send_text_message
 
 load_dotenv()
 
-
 machine = TocMachine(
     states=["user", "fsm", "intro", "flirt", "greet", "replyflirt"],
     transitions=[
