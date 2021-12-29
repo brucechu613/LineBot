@@ -14,21 +14,27 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2"],
+    states=["user", "fsm", "intro", "flirt"],
     transitions=[
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "state1",
-            "conditions": "is_going_to_state1",
+            "dest": "fsm",
+            "conditions": "is_going_to_fsm",
         },
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "state2",
-            "conditions": "is_going_to_state2",
+            "dest": "intro",
+            "conditions": "is_going_to_intro",
         },
-        {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "flirt",
+            "conditions": "is_going_to_flirt",
+        },
+        {"trigger": "go_back", "source": ["fsm", "intro"], "dest": "user"}
     ],
     initial="user",
     auto_transitions=False,
@@ -51,8 +57,9 @@ if channel_access_token is None:
 line_bot_api = LineBotApi(channel_access_token)
 parser = WebhookParser(channel_secret)
 
-
+"""
 @app.route("/callback", methods=["POST"])
+
 def callback():
     signature = request.headers["X-Line-Signature"]
     # get request body as text
@@ -77,6 +84,7 @@ def callback():
         )
 
     return "OK"
+"""
 
 
 @app.route("/webhook", methods=["POST"])
@@ -108,6 +116,7 @@ def webhook_handler():
 
     return "OK"
 
+os.environ["PATH"] += os.pathsep + r'C:\Users\bruce\anaconda3\Lib\site-packages'
 
 @app.route("/show-fsm", methods=["GET"])
 def show_fsm():
@@ -118,3 +127,4 @@ def show_fsm():
 if __name__ == "__main__":
     port = os.environ.get("PORT", 8000)
     app.run(host="0.0.0.0", port=port, debug=True)
+    
