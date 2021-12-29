@@ -52,7 +52,7 @@ class TocMachine(GraphMachine):
     def on_enter_greet(self, event):
         print("I'm entering greet")
         greetlist = ["你好呀美女/帥哥(媚眼","好久不見!!!\n最近過得如何呢小可愛","怎麼了嗎親愛的?\n需要我幫你甚麼嗎(嬌羞"]
-        
+
         reply_token = event.reply_token
         send_text_message(reply_token, greetlist[int(3*random())])
         self.go_back()      
@@ -62,7 +62,6 @@ class TocMachine(GraphMachine):
         
     def on_enter_flirt(self, event):
         print("I'm entering flirt")
-
         reply_token = event.reply_token
         s = flirt[len(flirt)*random()]
         send_text_message(reply_token, s)
