@@ -34,7 +34,7 @@ class TocMachine(GraphMachine):
 
         reply_token = event.reply_token
         send_image_url(reply_token, "https://github.com/brucechu613/LineBot/blob/master/img/show-fsm.png?raw=true")
-        self.go_back()
+        self.go_back(event)
 
     def on_exit_fsm(self, event):
         print("Leaving fsm")
@@ -44,7 +44,7 @@ class TocMachine(GraphMachine):
 
         reply_token = event.reply_token
         send_text_message(reply_token, "想必你一定迫不及待的想跟英俊的害羞男孩我聊天吧\n才會如此著急的想知道我有哪些功能\n以下是我帥氣的功能唷\n\n1:輸入fsm 可以看到fsm的圖\n2:輸入intro 可以看到英俊的害羞男孩我的使用功能\n3:輸入撩我 英俊的害羞男孩我會反過來讓你害羞")
-        self.go_back()
+        self.go_back(event)
 
     def on_exit_intro(self, event):
         print("Leaving intro")
