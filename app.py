@@ -27,25 +27,26 @@ machine = TocMachine(
             "dest": "intro",
             "conditions": "is_going_to_intro",
         },
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "flirt",
-            "conditions": "is_going_to_flirt",
-        },
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "greet",
-            "conditions": "is_going_to_greet",
-        },
-        {
-            "trigger": "advance",
-            "source": "flirt",
-            "dest": "reply_flirt",
-            "conditions": "is_going_to_reply_flirt",
-        },
-        {"trigger": "go_back", "source": ["fsm", "intro", "greet", "reply_flirt"], "dest": "user"}
+        # {
+        #     "trigger": "advance",
+        #     "source": "user",
+        #     "dest": "flirt",
+        #     "conditions": "is_going_to_flirt",
+        # },
+        # 
+        # {
+        #     "trigger": "advance",
+        #     "source": "user",
+        #     "dest": "greet",
+        #     "conditions": "is_going_to_greet",
+        # },
+        # {
+        #     "trigger": "advance",
+        #     "source": "flirt",
+        #     "dest": "reply_flirt",
+        #     "conditions": "is_going_to_reply_flirt",
+        # },
+        {"trigger": "go_back", "source": ["fsm", "intro"], "dest": "user"}
     ],
     initial="user",
     auto_transitions=False,
