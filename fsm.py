@@ -33,6 +33,7 @@ class TocMachine(GraphMachine):
         print("I'm entering fsm")
 
         reply_token = event.reply_token
+        send_text_message(reply_token, "https://github.com/brucechu613/LineBot/blob/master/img/show-fsm.png?raw=true")
         send_image_url(reply_token, "https://github.com/brucechu613/LineBot/blob/master/img/show-fsm.png?raw=true")
         self.go_back(event)
 
@@ -55,7 +56,7 @@ class TocMachine(GraphMachine):
 
         reply_token = event.reply_token
         send_text_message(reply_token, greetlist[int(3*random())])
-        self.go_back()      
+        self.go_back(event)      
           
     def on_exit_greet(self, event):
         print("Leaving exit")
@@ -74,6 +75,7 @@ class TocMachine(GraphMachine):
 
         reply_token = event.reply_token
         send_text_message(reply_token, flirt_answer[s])
+        self.go_back(event)
 
     def on_exit_flirt(self, event):
         print("Leaving replyflirt")
