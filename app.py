@@ -27,6 +27,12 @@ machine = TocMachine(
             "dest": "intro",
             "conditions": "is_going_to_intro",
         },
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "greet",
+            "conditions": "is_going_to_greet",
+        },
         # {
         #     "trigger": "advance",
         #     "source": "user",
@@ -34,12 +40,7 @@ machine = TocMachine(
         #     "conditions": "is_going_to_flirt",
         # },
         # 
-        # {
-        #     "trigger": "advance",
-        #     "source": "user",
-        #     "dest": "greet",
-        #     "conditions": "is_going_to_greet",
-        # },
+        
         # {
         #     "trigger": "advance",
         #     "source": "flirt",
