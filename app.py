@@ -13,7 +13,7 @@ from utils import send_text_message
 load_dotenv()
 
 machine = TocMachine(
-    states=["user", "fsm", "intro", "flirt", "greet", "replyflirt"],
+    states=["user", "fsm", "intro", "flirt", "greet", "reply_flirt"],
     transitions=[
         {
             "trigger": "advance",
@@ -33,21 +33,19 @@ machine = TocMachine(
             "dest": "greet",
             "conditions": "is_going_to_greet",
         },
-        # {
-        #     "trigger": "advance",
-        #     "source": "user",
-        #     "dest": "flirt",
-        #     "conditions": "is_going_to_flirt",
-        # },
-        # 
-        
-        # {
-        #     "trigger": "advance",
-        #     "source": "flirt",
-        #     "dest": "reply_flirt",
-        #     "conditions": "is_going_to_reply_flirt",
-        # },
-        {"trigger": "go_back", "source": ["fsm", "intro"], "dest": "user"}
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "flirt",
+            "conditions": "is_going_to_flirt",
+        },
+        {
+            "trigger": "advance",
+            "source": "flirt",
+            "dest": "reply_flirt",
+            "conditions": "is_going_to_reply_flirt",
+        },
+        {"trigger": "go_back", "source": ["fsm", "intro", "greet", "reply_flirt"], "dest": "user"}
     ],
     initial="user",
     auto_transitions=False,
@@ -129,7 +127,7 @@ def webhook_handler():
 
     return "OK"
 
-os.environ["PATH"] += os.pathsep + r'C:\Users\bruce\anaconda3\Lib\site-packages'
+os.environ["PATH"] += os.pathsep + r'C:\Program Files (x86)\Graphviz\bin'
 
 @app.route("/show-fsm", methods=["GET"])
 def show_fsm():
@@ -138,6 +136,7 @@ def show_fsm():
 
 
 if __name__ == "__main__":
+    show_fsm()    
     port = os.environ.get("PORT", 8000)
     app.run(host="0.0.0.0", port=port, debug=True)
-    
+
