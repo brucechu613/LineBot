@@ -33,7 +33,7 @@ class TocMachine(GraphMachine):
         print("I'm entering fsm")
 
         reply_token = event.reply_token
-        send_image_url(reply_token, "https://github.com/brucechu613/LineBot/blob/master/img/show-fsm.png?raw=true")
+        send_image_url(reply_token, "https://i.imgur.com/agT0rrK.png")
         self.go_back(event)
 
     def on_exit_fsm(self, event):
