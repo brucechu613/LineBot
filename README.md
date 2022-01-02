@@ -73,18 +73,29 @@ Or You can use [servo](http://serveo.net/) to expose local servers to the intern
 ## Finite State Machine
 ![fsm](./img/show-fsm.png)
 
+## Introduction
+
+This line bot provides love and care whenever you feel lonely and needs someone to care about you and
+show comfort
+
 ## Usage
 The initial state is set to `user`.
 
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
+Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state or moves to the next state after the bot replies corresponding message.
 
 * user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
+	* Input: "Intro"
+		* Reply: "my intro"
 
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
+	* Input: "fsm"
+		* Reply: "A image of my final state machine"
 
+	* Input: "all sorts of greetings"
+		* Reply: "One of my three greetings"
+
+	* Input: "撩我"
+		* Reply: "flirts with you"
+		
 ## Deploy
 Setting to deploy webhooks on Heroku.
 
