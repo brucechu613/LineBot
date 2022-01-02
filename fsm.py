@@ -59,12 +59,12 @@ class TocMachine(GraphMachine):
         self.go_back(event)      
           
     def on_exit_greet(self, event):
-        print("Leaving exit")
+        print("Leaving greet")
         
     def on_enter_flirt(self, event):
         print("I'm entering flirt")
         reply_token = event.reply_token
-        s = flirt[len(flirt)*random()]
+        s = flirt[int(len(flirt)*random())]
         send_text_message(reply_token, s)
 
     def on_exit_flirt(self, event):
