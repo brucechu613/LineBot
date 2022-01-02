@@ -1,57 +1,18 @@
 import os
 import sys
 
+from machine import *
 from flask import Flask, jsonify, request, abort, send_file
 from dotenv import load_dotenv
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
-from fsm import TocMachine
 from utils import send_text_message
 
 load_dotenv()
 
-machine = TocMachine(
-    states=["user", "fsm", "intro", "flirt", "greet", "reply_flirt"],
-    transitions=[
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "fsm",
-            "conditions": "is_going_to_fsm",
-        },
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "intro",
-            "conditions": "is_going_to_intro",
-        },
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "greet",
-            "conditions": "is_going_to_greet",
-        },
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "flirt",
-            "conditions": "is_going_to_flirt",
-        },
-        {
-            "trigger": "advance",
-            "source": "flirt",
-            "dest": "reply_flirt",
-            "conditions": "is_going_to_reply_flirt",
-        },
-        {"trigger": "go_back", "source": ["fsm", "intro", "greet", "reply_flirt"], "dest": "user"}
-    ],
-    initial="user",
-    auto_transitions=False,
-    show_conditions=True,
-)
-
+machine = {}
 app = Flask(__name__, static_url_path="")
 
 
@@ -119,9 +80,10 @@ def webhook_handler():
             continue
         if not isinstance(event.message.text, str):
             continue
-        print(f"\nFSM STATE: {machine.state}")
-        print(f"REQUEST BODY: \n{body}")
-        response = machine.advance(event)
+        if event.source.user_id not in machine:
+            machine[event.source.user_id] = create_machine()
+            
+        response = machine[event.source.user_id].advance(event)
         if response == False:
             send_text_message(event.reply_token, "Not Entering any State")
 
