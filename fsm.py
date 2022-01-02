@@ -35,7 +35,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_text_message(reply_token, "https://github.com/brucechu613/LineBot/blob/master/img/show-fsm.png?raw=true")
         send_image_url(reply_token, "https://github.com/brucechu613/LineBot/blob/master/img/show-fsm.png?raw=true")
-        self.go_back(event)
+        self.go_back()
 
     def on_exit_fsm(self, event):
         print("Leaving fsm")
