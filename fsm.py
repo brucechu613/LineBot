@@ -70,14 +70,14 @@ class TocMachine(GraphMachine):
     def on_exit_flirt(self, event):
         print("Leaving flirt")
         
-    def on_enter_replyflirt(self, event):
+    def on_enter_reply_flirt(self, event):
         print("I'm replying flirt")
 
         reply_token = event.reply_token
         send_text_message(reply_token, flirt_answer[s])
         self.go_back(event)
 
-    def on_exit_flirt(self, event):
+    def on_exit_reply_flirt(self, event):
         print("Leaving replyflirt")
         
     
