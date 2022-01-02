@@ -65,7 +65,7 @@ class TocMachine(GraphMachine):
         print("I'm entering flirt")
         reply_token = event.reply_token
         self.s = flirt[int(len(flirt)*random())]
-        send_text_message(reply_token, s)
+        send_text_message(reply_token, self.s)
 
     def on_exit_flirt(self, event):
         print("Leaving flirt")
