@@ -64,7 +64,7 @@ class TocMachine(GraphMachine):
     def on_enter_flirt(self, event):
         print("I'm entering flirt")
         reply_token = event.reply_token
-        s = flirt[int(len(flirt)*random())]
+        self.s = flirt[int(len(flirt)*random())]
         send_text_message(reply_token, s)
 
     def on_exit_flirt(self, event):
@@ -74,7 +74,7 @@ class TocMachine(GraphMachine):
         print("I'm replying flirt")
 
         reply_token = event.reply_token
-        send_text_message(reply_token, flirt_answer[s])
+        send_text_message(reply_token, flirt_answer[self.s])
         self.go_back(event)
 
     def on_exit_reply_flirt(self, event):
