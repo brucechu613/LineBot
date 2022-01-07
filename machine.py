@@ -2,8 +2,14 @@ from fsm import TocMachine
 
 def create_machine():
     machine = TocMachine(
-        states=["user", "fsm", "intro", "flirt", "greet", "reply_flirt"],
+        states=["user", "fsm", "intro", "flirt", "greet", "reply_flirt","test"],
         transitions=[
+            {
+                "trigger": "advance",
+                "source": "user",
+                "dest": "test",
+                "conditions": "is_going_to_test",
+            },
             {
                 "trigger": "advance",
                 "source": "user",
@@ -34,7 +40,7 @@ def create_machine():
                 "dest": "reply_flirt",
                 "conditions": "is_going_to_reply_flirt",
             },
-            {"trigger": "go_back", "source": ["fsm", "intro", "greet", "reply_flirt"], "dest": "user"}
+            {"trigger": "go_back", "source": ["fsm", "intro", "greet", "reply_flirt","test"], "dest": "user"}
         ],
         initial="user",
         auto_transitions=False,

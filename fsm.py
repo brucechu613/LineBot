@@ -1,5 +1,7 @@
 from transitions.extensions import GraphMachine
 from random import random
+
+from transitions.extensions.markup import rep
 from utils import *
 
 s = ""
@@ -28,6 +30,10 @@ class TocMachine(GraphMachine):
     
     def is_going_to_reply_flirt(self,event):
         return True
+    
+    def is_going_to_test(self,event):
+        test = event.message.text
+        return test.lower() == "test"
     
     def on_enter_fsm(self, event):
         print("I'm entering fsm")
@@ -79,4 +85,11 @@ class TocMachine(GraphMachine):
     def on_exit_reply_flirt(self, event):
         print("Leaving replyflirt")
         
-    
+    def on_enter_test(self, event):
+        print("I'm entering test")
+        reply_token = event.reply_token
+        send_text_message(reply_token, "1234")
+        self.go_back(event)
+
+    def on_exit_test(self, event):
+        print("Leaving test")
