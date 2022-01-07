@@ -1,7 +1,6 @@
 from transitions.extensions import GraphMachine
 from random import random
 
-from transitions.extensions.markup import rep
 from utils import *
 
 s = ""
